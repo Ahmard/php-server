@@ -1,0 +1,25 @@
+{
+    "name": "ahmard/php-server",
+    "description": "PHP local server helper",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^8.0",
+        "react/child-process": "^0.6.3"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^0.12.98",
+        "symfony/var-dumper": "^5.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "PHPServer\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "ahmard",
+            "email": "ahmard06@gmail.com"
+        }
+    ]
+}
