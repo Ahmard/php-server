@@ -16,7 +16,8 @@ use PHPServer\BuiltIn\Server;
 
 Server::create('127.0.0.1', '9900')
     ->setDocumentRoot(__DIR__)
-    ->start();
+    ->start()
+    ->logOutputToConsole();
 ```
 
 - Route request to single entry file
@@ -57,5 +58,6 @@ $handler = function (RequestInterface $request) {
 
 Server::create('127.0.0.1', 9001)
     ->onRequest($handler)
-    ->start();
+    ->start()
+    ->logOutputToConsole();
 ```
