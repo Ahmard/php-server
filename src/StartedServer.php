@@ -1,14 +1,14 @@
 <?php
 
-namespace PHPServer\BuiltIn;
+namespace PHPServer;
 
 use React\ChildProcess\Process;
 
-class StartedServer
+class StartedServer implements StartedServerInterface
 {
     public function __construct(
-        protected Server $server,
-        protected Process $process
+        protected ServerInterface $server,
+        protected Process         $process
     )
     {
     }
@@ -22,9 +22,9 @@ class StartedServer
     }
 
     /**
-     * @return Server
+     * @return ServerInterface
      */
-    public function getServer(): Server
+    public function getServer(): ServerInterface
     {
         return $this->server;
     }
