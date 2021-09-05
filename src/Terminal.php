@@ -10,20 +10,6 @@ use function Opis\Closure\unserialize;
 
 class Terminal
 {
-    public static function getJsonDecodedArg(
-        string $shortName,
-        string $logName,
-        bool   $associative = false,
-        int    $depth = 512,
-        int    $flags = 0
-    )
-    {
-        $json = self::getArgument($shortName, $logName);
-        if (!$json) return null;
-
-        return json_decode($json, $associative, $depth, $flags);
-    }
-
     public static function getArgument(string $shortName, string|null $longName = null): string|null
     {
         $optValue = getopt(

@@ -15,9 +15,9 @@ class ServerInfo
     protected Closure|null $requestCallback = null;
 
 
-    #[Pure] public static function create(): static
+    #[Pure] public static function create(): ServerInfo
     {
-        return new static();
+        return new ServerInfo();
     }
 
     /**
@@ -32,7 +32,7 @@ class ServerInfo
      * @param string $host
      * @return ServerInfo
      */
-    public function setHost(string $host): static
+    public function setHost(string $host): ServerInfo
     {
         $this->host = $host;
         return $this;
@@ -50,7 +50,7 @@ class ServerInfo
      * @param int $port
      * @return ServerInfo
      */
-    public function setPort(int $port): static
+    public function setPort(int $port): ServerInfo
     {
         $this->port = $port;
         return $this;
@@ -68,7 +68,7 @@ class ServerInfo
      * @param string|null $documentRoot
      * @return ServerInfo
      */
-    public function setDocumentRoot(?string $documentRoot): static
+    public function setDocumentRoot(?string $documentRoot): ServerInfo
     {
         $this->documentRoot = $documentRoot;
         return $this;
@@ -86,7 +86,7 @@ class ServerInfo
      * @param string|null $routerScript
      * @return ServerInfo
      */
-    public function setRouterScript(?string $routerScript): static
+    public function setRouterScript(?string $routerScript): ServerInfo
     {
         $this->routerScript = $routerScript;
         return $this;
@@ -104,7 +104,7 @@ class ServerInfo
      * @param Closure|null $requestCallback
      * @return ServerInfo
      */
-    public function setRequestCallback(?Closure $requestCallback): static
+    public function setRequestCallback(?Closure $requestCallback): ServerInfo
     {
         $this->requestCallback = $requestCallback;
         return $this;

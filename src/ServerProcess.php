@@ -11,18 +11,8 @@ class ServerProcess
     {
         $command = self::constructCommand($server->getCommand());
 
-        var_dump(exec($command));
-        die;
-        $process = new Process('echo foo');
+        $process = new Process($command);
         $process->start();
-
-        $process->stdout->on('data', function ($chunk) {
-            // echo $chunk;
-        });
-
-        $process->on('exit', function ($exitCode, $termSignal) {
-            //echo 'Process exited with code ' . $exitCode . PHP_EOL;
-        });
 
         return $process;
     }

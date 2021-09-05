@@ -14,4 +14,7 @@ $serverInfo = $arguments['info'];
 
 $socket = new SocketServer("{$serverInfo->getHost()}:{$serverInfo->getPort()}");
 $http = new HttpServer($serverInfo->getRequestCallback());
+
+echo "Server started";
+
 $http->listen($socket);

@@ -1,0 +1,8 @@
+parameters:
+    level: 6
+    checkMissingIterableValueType: false
+    paths:
+        - bin
+        - src
+    ignoreErrors:
+        - '#Attribute class JetBrains.* does not exist\.#'

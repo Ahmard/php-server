@@ -8,8 +8,7 @@ use PHPServer\ServerCommand;
 use PHPServer\ServerInfo;
 use PHPServer\ServerInterface;
 use PHPServer\ServerProcess;
-use PHPServer\StartedServer;
-use PHPServer\StartedServerInterface;
+use PHPServer\RunningServer;
 use PHPServer\Terminal;
 use function PHPServer\base_path;
 
@@ -28,7 +27,7 @@ class Server implements ServerInterface
 
     #[Pure] public static function create(string $host, int $port): static
     {
-        return new Server($host, $port);
+        return new static($host, $port);
     }
 
     public function setDocumentRoot(string $path): static
@@ -43,9 +42,9 @@ class Server implements ServerInterface
         return $this;
     }
 
-    public function start(): StartedServerInterface
+    public function start(): RunningServer
     {
-        return new StartedServer($this, ServerProcess::create($this));
+        return new RunningServer($this, ServerProcess::create($this));
     }
 
     public function getCommand(): ServerCommand

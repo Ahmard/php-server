@@ -12,7 +12,7 @@ interface ServerInterface
 
     public function onRequest(callable $callback): static;
 
-    public function start(): StartedServerInterface;
+    public function start(): RunningServer;
 
     public function getCommand(): ServerCommand;
 
