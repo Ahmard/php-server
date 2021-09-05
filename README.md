@@ -1,4 +1,5 @@
 # PHP Server
+A small library to help run PHP servers easily and quickly. 
 
 ## Installation
 ```

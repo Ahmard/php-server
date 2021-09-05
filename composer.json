@@ -1,6 +1,6 @@
 {
     "name": "ahmard/php-server",
-    "description": "PHP local server helper",
+    "description": "A small library to help run PHP servers easily and quickly.",
     "type": "library",
     "license": "MIT",
     "require": {
