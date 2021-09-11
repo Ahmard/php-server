@@ -6,6 +6,8 @@ use JetBrains\PhpStorm\Pure;
 
 class ServerCommand
 {
+    public const SERVER_INFO_SHORT_ARGUMENT = 'i';
+    public const SERVER_INFO_LONG_ARGUMENT = '--server-info';
     protected array $arguments = [];
 
     public function __construct(protected string $command)

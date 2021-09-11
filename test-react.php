@@ -13,7 +13,9 @@ $handler = function (RequestInterface $request) {
     return new Response(200, ['Content-Type' => 'text/html'], $html);
 };
 
-Server::create('127.0.0.1', 9903)
+Server::create('127.0.0.1', 9904)
     ->onRequest($handler)
     ->start()
-    ->logOutputToConsole();
+    ->onStdout(function (string $data) {
+        var_dump($data);
+    });

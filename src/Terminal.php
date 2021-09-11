@@ -10,15 +10,42 @@ use function Opis\Closure\unserialize;
 
 class Terminal
 {
-    public static function getArgument(string $shortName, string|null $longName = null): string|null
+    public static function getArgumentAndDecode(
+        string       $shortName,
+        array|string $longNames = []
+    ): mixed
+    {
+        return self::decodeArgument(self::getArgument($shortName, $longNames));
+    }
+
+    /**
+     * Decode prepared cli argument
+     *
+     * @param string $value
+     * @return mixed
+     */
+    public static function decodeArgument(string $value): mixed
+    {
+        return unserialize(base64_decode($value));
+    }
+
+    public static function getArgument(
+        string       $shortName,
+        array|string $longNames = []
+    ): string|null
     {
         $optValue = getopt(
             "$shortName:",
-            $longName ? ["$longName:"] : []
+            is_string($longNames) ? ["$longNames:"] : $longNames
         );
 
-        if ($longName && array_key_exists($longName, $optValue)) {
-            return $optValue[$longName];
+        if (is_string($longNames) && array_key_exists($longNames, $optValue)) {
+            return $optValue[$longNames];
+        }
+
+        if (array_key_exists($longNames, $optValue)) {
+            /**@phpstan-ignore-next-line* */
+            return $optValue[$longNames];
         }
 
         return $optValue[$shortName] ?? null;
@@ -53,23 +80,14 @@ class Terminal
         }
 
         return [
+            'original_info' => $serverInfo,
             'info' => ServerInfo::create()
                 ->setHost($serverInfo['host'])
                 ->setPort($serverInfo['port'])
                 ->setDocumentRoot($serverInfo['document_root'])
                 ->setRequestCallback($serverInfo['request_callback'])
-                ->setRouterScript($serverInfo['router_script']),
+                ->setRouterScript($serverInfo['router_script'])
+                ->setEnvDirectory($serverInfo['env_directory']),
         ];
-    }
-
-    /**
-     * Decode prepared cli argument
-     *
-     * @param string $value
-     * @return mixed
-     */
-    public static function decodeArgument(string $value): mixed
-    {
-        return unserialize(base64_decode($value));
     }
 }

@@ -4,7 +4,6 @@ namespace PHPServer;
 
 use Closure;
 use JetBrains\PhpStorm\ArrayShape;
-use JetBrains\PhpStorm\Pure;
 
 class ServerInfo
 {
@@ -12,11 +11,22 @@ class ServerInfo
     protected int $port;
     protected string|null $documentRoot = null;
     protected string|null $routerScript = null;
+    protected string|null $envDirectory = null;
     protected Closure|null $requestCallback = null;
 
 
-    #[Pure] public static function create(): ServerInfo
+    public static function create(array $data = []): ServerInfo
     {
+        if ([] !== $data) {
+            return (new ServerInfo())
+                ->setHost($data['host'])
+                ->setPort($data['port'])
+                ->setDocumentRoot($data['document_root'])
+                ->setRequestCallback($data['request_callback'])
+                ->setRouterScript($data['router_script'])
+                ->setEnvDirectory($data['env_directory']);
+        }
+
         return new ServerInfo();
     }
 
@@ -110,13 +120,39 @@ class ServerInfo
         return $this;
     }
 
-    #[ArrayShape(['host' => "string", 'port' => "int", 'document_root' => "null|string", 'router_script' => "null|string", 'request_callback' => "\Closure|null"])]
+    /**
+     * @return string|null
+     */
+    public function getEnvDirectory(): ?string
+    {
+        return $this->envDirectory;
+    }
+
+    /**
+     * @param string|null $envDirectory
+     * @return static
+     */
+    public function setEnvDirectory(?string $envDirectory): static
+    {
+        $this->envDirectory = $envDirectory;
+        return $this;
+    }
+
+    #[ArrayShape([
+        'host' => "string",
+        'port' => "int",
+        'document_root' => "null|string",
+        'env_directory' => "null|string",
+        'router_script' => "null|string",
+        'request_callback' => "\Closure|null"
+    ])]
     public function toArray(): array
     {
         return [
             'host' => $this->host,
             'port' => $this->port,
             'document_root' => $this->documentRoot,
+            'env_directory' => $this->envDirectory,
             'router_script' => $this->routerScript,
             'request_callback' => $this->requestCallback,
         ];

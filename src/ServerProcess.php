@@ -21,7 +21,7 @@ class ServerProcess
     {
         $command = $serverCommand->getCommand();
         foreach ($serverCommand->getArguments() as $name => $value) {
-            $command .= " $name" . (!str_contains($name, '--') ? " \"$value\"" : "\"$value\"");
+            $command .= " $name" . (str_contains($name, '--') ? "=\"$value\"" : " \"$value\"");
         }
 
         return $command;
