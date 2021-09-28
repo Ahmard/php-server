@@ -8,7 +8,6 @@ use Nette\Utils\JsonException;
 use PHPServer\Env;
 use RingCentral\Psr7\Uri;
 use Swoole\Http\Request as SWRequest;
-use Throwable;
 
 
 /**
@@ -20,7 +19,6 @@ class Request
 {
     protected ?array $parsedJsonBody = null;
     protected bool $expectsJson = false;
-    protected RequestMiddleware $middleware;
     protected Uri $uri;
 
 
@@ -73,16 +71,6 @@ class Request
     public function __call(string $name, array $arguments): mixed
     {
         return $this->request->$name(...$arguments);
-    }
-
-    /**
-     * @throws Throwable
-     * @throws JsonException
-     */
-    public function initMiddleware(array $middlewares): void
-    {
-        $this->middleware = new RequestMiddleware($this, $middlewares);
-        $this->middleware->current()->handle($this);
     }
 
     /**
@@ -191,11 +179,11 @@ class Request
         return $this->response;
     }
 
-    public function middleware(): RequestMiddleware
-    {
-        return $this->middleware;
-    }
-
+    /**
+     * Returns an instance of swoole request class
+     *
+     * @return SWRequest
+     */
     public function getSwooleRequest(): SWRequest
     {
         return $this->request;

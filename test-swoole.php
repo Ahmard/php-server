@@ -18,7 +18,7 @@ $paths = [
 ];
 
 Server::create('127.0.0.1', 9904)
-    ->watchFilesystemChanges($paths)
+    //->watchFilesystemChanges($paths) // Requires "ahmard/swotch" package
     ->onRequest($handler)
     ->setServerConfig([
         'enable_static_handler' => true,

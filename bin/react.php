@@ -13,8 +13,8 @@ $arguments = Terminal::performServerChecks();
 $serverInfo = $arguments['info'];
 
 $socket = new SocketServer("{$serverInfo->getHost()}:{$serverInfo->getPort()}");
-$http = new HttpServer($serverInfo->getRequestCallback());
+$httpServer = new HttpServer($serverInfo->getRequestCallback());
 
-echo "Server started";
+echo "ReactPHP server started at http://{$serverInfo->getHost()}:{$serverInfo->getPort()}\n";
 
-$http->listen($socket);
+$httpServer->listen($socket);

@@ -1,16 +1,21 @@
 # PHP Server
-A small library to help run PHP servers easily and quickly. 
+
+A small library to help run PHP servers easily and quickly.
 
 ## Installation
+
 ```
 composer require ahmard/php-server
 ```
 
 ## Usage
+
 ### PHP Built-In Server
+
 An implementation of [Built-In Server](https://www.php.net/manual/en/features.commandline.webserver.php)
 
 - With document root
+
 ```php
 use PHPServer\BuiltIn\Server;
 
@@ -21,6 +26,7 @@ Server::create('127.0.0.1', '9900')
 ```
 
 - Route request to single entry file
+
 ```php
 use PHPServer\BuiltIn\Server;
 
@@ -30,6 +36,7 @@ Server::create('127.0.0.1', '9900')
 ```
 
 - Provide callable to be invoked when request is received
+
 ```php
 use PHPServer\BuiltIn\Server;
 
@@ -38,8 +45,8 @@ Server::create('127.0.0.1', '9900')
     ->start();
 ```
 
-
 ### ReactPHP
+
 An implementation of [ReactPHP](https://reactphp.org)
 
 ```php
@@ -63,6 +70,7 @@ Server::create('127.0.0.1', 9001)
 ```
 
 ### Swoole
+
 An implementation of [Swoole](https://swoole.co.uk)
 
 ```php
@@ -79,8 +87,30 @@ $handler = function (Request $request) {
 };
 
 Server::create('127.0.0.1', 9904)
-    ->watchFilesystemChanges([__DIR__])
     ->onRequest($handler)
+    ->setServerConfig([
+        'enable_static_handler' => true,
+        'http_parse_post' => true,
+        'worker_num' => 8,
+        'package_max_length' => 10 * 1024 * 1024
+    ])
+    ->start()
+    ->logOutputToConsole();
+```
+
+Swoole with filesystem watcher
+
+```php
+use PHPServer\Swoole\Http\Request;
+use PHPServer\Swoole\Server;
+
+require 'vendor/autoload.php';
+
+Server::create('127.0.0.1', 9904)
+    ->watchFilesystemChanges([__DIR__])
+    ->onRequest(function (Request $request){
+        $request->response()->html('Hello');
+    })
     ->setServerConfig([
         'enable_static_handler' => true,
         'http_parse_post' => true,

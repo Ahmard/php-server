@@ -16,6 +16,4 @@ $handler = function (RequestInterface $request) {
 Server::create('127.0.0.1', 9904)
     ->onRequest($handler)
     ->start()
-    ->onStdout(function (string $data) {
-        var_dump($data);
-    });
+    ->onStdout(fn(string $log) => print $log);

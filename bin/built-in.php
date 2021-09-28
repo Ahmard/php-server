@@ -10,7 +10,6 @@ $arguments = Terminal::performServerChecks(true);
 /**@var ServerInfo $serverInfo * */
 $serverInfo = $arguments['info'];
 
-
 if (null !== $serverInfo->getRequestCallback()) {
     $serverInfo->getRequestCallback()();
 }

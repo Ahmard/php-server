@@ -1,7 +1,7 @@
 <?php
 
 
-namespace PHPServer\Swoole;
+namespace PHPServer;
 
 
 use Symfony\Component\Console\Output\ConsoleOutput;

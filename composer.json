@@ -17,8 +17,7 @@
     "require-dev": {
         "phpstan/phpstan": "^0.12.98",
         "symfony/var-dumper": "^5.3",
-        "swoole/ide-helper": "^4.7",
-        "ahmard/swotch": "^0.0.1"
+        "swoole/ide-helper": "^4.7"
     },
     "autoload": {
         "psr-4": {

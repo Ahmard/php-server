@@ -173,4 +173,14 @@ class Response
             );
         }
     }
+
+    /**
+     * Returns an instance of swoole response class
+     *
+     * @return SWResponse
+     */
+    public function getSwooleResponse(): SWResponse
+    {
+        return $this->response;
+    }
 }

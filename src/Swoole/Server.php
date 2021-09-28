@@ -5,6 +5,8 @@ namespace PHPServer\Swoole;
 use PHPServer\AbstractServer;
 use PHPServer\ServerCommand;
 use PHPServer\Terminal;
+use RuntimeException;
+use Swotch\Watcher;
 use function PHPServer\base_path;
 
 class Server extends AbstractServer
@@ -21,8 +23,18 @@ class Server extends AbstractServer
         return $config;
     }
 
+    /**
+     * This will require an installation of "ahmard/swotch" package
+     *
+     * @param array $paths
+     * @return $this
+     */
     public function watchFilesystemChanges(array $paths): static
     {
+        if (!class_exists(Watcher::class)) {
+            throw new RuntimeException('Filesystem watcher requires an installation of "ahmard/swotch"');
+        }
+
         $this->serverConfig['watch_filesystem_changes'] = $paths;
         return $this;
     }

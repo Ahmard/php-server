@@ -1,9 +1,9 @@
 <?php
 
 use Dotenv\Dotenv;
+use PHPServer\Console;
 use PHPServer\Env;
 use PHPServer\ServerInfo;
-use PHPServer\Swoole\Console;
 use PHPServer\Swoole\Http\Request;
 use PHPServer\Swoole\Http\Response;
 use PHPServer\Terminal;
@@ -62,7 +62,7 @@ try {
     $server->on('start', function (Server $server) use ($serverInfo, $swooleData) {
         Console::info("Swoole server started at http://{$serverInfo->getHost()}:{$serverInfo->getPort()}");
 
-        file_put_contents(__DIR__ . '/.pid', $server->getMasterPid());
+        file_put_contents(__DIR__ . '/.swoole-pid', $server->getMasterPid());
 
         //Run file watcher
         if (!empty($swooleData['watch_filesystem_changes'])) {

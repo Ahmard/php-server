@@ -13,7 +13,7 @@ class Terminal
     public static function getArgumentAndDecode(
         string       $shortName,
         array|string $longNames = []
-    ): mixed
+    ): array
     {
         return self::decodeArgument(self::getArgument($shortName, $longNames));
     }
@@ -22,9 +22,9 @@ class Terminal
      * Decode prepared cli argument
      *
      * @param string $value
-     * @return mixed
+     * @return array
      */
-    public static function decodeArgument(string $value): mixed
+    public static function decodeArgument(string $value): array
     {
         return unserialize(base64_decode($value));
     }
@@ -66,7 +66,7 @@ class Terminal
      * @param bool $useEnvVars
      * @return array{info: ServerInfo}
      */
-    #[ArrayShape(['info' => "\PHPServer\ServerInfo"])]
+    #[ArrayShape(['original_info' => "mixed|string", 'info' => "\PHPServer\ServerInfo"])]
     public static function performServerChecks(bool $useEnvVars = false): array
     {
         $serverInfo = $useEnvVars
