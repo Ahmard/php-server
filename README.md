@@ -98,7 +98,8 @@ Server::create('127.0.0.1', 9904)
     ->logOutputToConsole();
 ```
 
-Swoole with filesystem watcher
+Swoole with filesystem watcher, 
+this requires an installation of [ahmard/swotch](https://github.com/ahmard/swotch) package.
 
 ```php
 use PHPServer\Swoole\Http\Request;
