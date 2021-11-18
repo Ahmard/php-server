@@ -43,4 +43,14 @@ class Server extends AbstractServer
 
         return $serverCommand;
     }
+
+    /**
+     * @param string|null $routerScript
+     * @return static
+     */
+    public function setRouterScript(?string $routerScript): static
+    {
+        $this->routerScript = $routerScript;
+        return $this;
+    }
 }
