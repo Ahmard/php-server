@@ -40,8 +40,6 @@ class Server extends AbstractServer
 
         }
 
-        dump($command);
-
         $serverCommand = ServerCommand::create($command);
 
         if (null !== $config->getDocumentRoot()) {
