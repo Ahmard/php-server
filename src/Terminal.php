@@ -44,7 +44,6 @@ class Terminal
         }
 
         if (array_key_exists($longNames, $optValue)) {
-            /**@phpstan-ignore-next-line* */
             return $optValue[$longNames];
         }
 

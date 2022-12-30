@@ -4,20 +4,17 @@
     "type": "library",
     "license": "MIT",
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "ext-pdo": "*",
-        "react/child-process": "^0.6.3",
-        "react/http": "^1.5",
+        "react/child-process": "^0.6.5",
         "opis/closure": "^3.6",
-        "symfony/console": "^5.3",
-        "ahmard/quick-route": "^3.8",
+        "symfony/console": "^6.2",
         "nette/utils": "^3.2",
         "vlucas/phpdotenv": "^5.3"
     },
     "require-dev": {
-        "phpstan/phpstan": "^0.12.98",
-        "symfony/var-dumper": "^5.3",
-        "swoole/ide-helper": "^4.7"
+        "phpstan/phpstan": "^1.9",
+        "symfony/var-dumper": "^5.3"
     },
     "autoload": {
         "psr-4": {

@@ -10,16 +10,21 @@ use function PHPServer\base_path;
 
 class Server extends AbstractServer
 {
-    protected static array $filledInfo = [];
     protected string|null $documentRoot = null;
     protected string|null $routerScript = null;
     protected Closure|null $requestCallback = null;
+    protected int|null $workers = null;
 
 
     public function getCommand(): ServerCommand
     {
         $config = $this->getInfo();
         $command = "php -S {$config->getHost()}:{$config->getPort()}";
+
+        if (null != $this->workers) {
+            $command = "PHP_CLI_SERVER_WORKERS=$this->workers $command";
+        }
+
 
         if (null == $config->getDocumentRoot()) {
 
@@ -34,6 +39,8 @@ class Server extends AbstractServer
             }
 
         }
+
+        dump($command);
 
         $serverCommand = ServerCommand::create($command);
 
@@ -51,6 +58,16 @@ class Server extends AbstractServer
     public function setRouterScript(?string $routerScript): static
     {
         $this->routerScript = $routerScript;
+        return $this;
+    }
+
+    /**
+     * @param int $num
+     * @return $this
+     */
+    public function setWorkers(int $num): static
+    {
+        $this->workers = $num;
         return $this;
     }
 }
