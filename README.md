@@ -44,3 +44,14 @@ Server::create('127.0.0.1', '9900')
     ->onRequest(fn() => var_dump('Request Received'))
     ->start();
 ```
+
+- Using multiple workers
+
+```php
+use PHPServer\BuiltIn\Server;
+
+Server::create('127.0.0.1', '9900')
+    ->setWorkers(2)
+    ->onRequest(fn() => var_dump('Request Received'))
+    ->start();
+```
