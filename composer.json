@@ -9,8 +9,7 @@
         "react/child-process": "^0.6.5",
         "opis/closure": "^3.6",
         "symfony/console": "^6.2",
-        "nette/utils": "^3.2",
-        "vlucas/phpdotenv": "^5.5"
+        "nette/utils": "^3.2"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.9",
