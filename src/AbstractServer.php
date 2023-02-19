@@ -9,7 +9,6 @@ abstract class AbstractServer implements ServerInterface
 {
     protected string|null $documentRoot = null;
     protected string|null $routerScript = null;
-    protected string|null $envDir = null;
     protected Closure|null $requestCallback = null;
 
     public function __construct(
@@ -27,12 +26,6 @@ abstract class AbstractServer implements ServerInterface
     public function setDocumentRoot(string $path): static
     {
         $this->documentRoot = $path;
-        return $this;
-    }
-
-    public function setEnvDirectory(string $path): static
-    {
-        $this->envDir = $path;
         return $this;
     }
 
