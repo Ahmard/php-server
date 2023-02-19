@@ -24,14 +24,6 @@ interface ServerInterface
     public function setDocumentRoot(string $path): static;
 
     /**
-     * Set environment variable file directory
-     *
-     * @param string $path
-     * @return $this
-     */
-    public function setEnvDirectory(string $path): static;
-
-    /**
      * Provide a callback to be executed whenever new request is received
      *
      * @param callable $callback
