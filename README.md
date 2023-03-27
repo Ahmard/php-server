@@ -5,7 +5,7 @@ A small library to help run PHP servers easily and quickly.
 ## Installation
 
 ```
-composer require ahmard/php-server
+composer require ahmard/php-server --dev
 ```
 
 ## Usage
@@ -55,3 +55,17 @@ Server::create('127.0.0.1', '9900')
     ->onRequest(fn() => var_dump('Request Received'))
     ->start();
 ```
+
+- Use preferred php version/executable
+
+```php
+use PHPServer\BuiltIn\Server;
+
+Server::create('127.0.0.1', '9900')
+    ->setWorkers(2)
+    ->setPHPExecutable('/usr/bin/php8.0')
+    ->onRequest(fn() => var_dump('Request Received'))
+    ->start();
+```
+
+Enjoy 😎
